@@ -2940,7 +2940,7 @@ function budgetApp() {
     // ============================================================
     // UTILITIES
     // ============================================================
-    formatCurrency(v, digits = 0) {
+    formatCurrency(v, digits = 2) {
       const n = Number(v) || 0;
       return new Intl.NumberFormat(CONFIG.LOCALE, {
         style: 'currency', currency: CONFIG.CURRENCY,
