@@ -806,30 +806,33 @@
 
     <!-- ============ DASHBOARD ============ -->
     <div x-show="activeTab === 'dashboard'" class="p-4 space-y-5" x-cloak>
-      <div class="bg-gradient-to-r from-cyan-600 to-blue-700 text-white p-4 rounded-2xl">
-        <div class="flex justify-between items-start gap-2 mb-3">
-          <div>
-            <p class="text-[10px] uppercase opacity-80">Bank Accounts ({{ accounts.length }})</p>
-            <p class="text-2xl font-black" x-text="formatCurrency(totals.bank)"></p>
-          </div>
-          <button @click="openAccountsModal()" class="text-[10px] bg-white/20 px-3 py-1 rounded-full flex-shrink-0">Manage</button>
-        </div>
-        <div class="space-y-1.5">
-          <template x-for="acc in accounts" :key="'ov-'+acc.id">
-            <div class="flex justify-between items-center text-xs gap-2">
-              <span class="truncate opacity-90" x-text="'• ' + acc.name"></span>
-              <span class="font-bold whitespace-nowrap" x-text="formatCurrency(accountBalances[acc.id] || 0)"></span>
-            </div>
-          </template>
-          <div x-show="accounts.length === 0" class="text-xs opacity-80 italic">
-            No accounts yet — <button @click="openAccountsModal()" class="underline font-bold">add one</button>
-          </div>
-        </div>
-        <div class="flex gap-x-4 gap-y-1 mt-3 pt-3 border-t border-white/20 text-xs flex-wrap">
-          <span>💵 Cash: <b x-text="formatCurrency(openingBalances.cash)"></b></span>
-          <span>📈 Investment: <b x-text="formatCurrency(openingBalances.investment)"></b></span>
-        </div>
+    <div class="bg-gradient-to-r from-cyan-600 to-blue-700 text-white p-4 rounded-2xl">
+  <div class="flex justify-between items-start gap-2 mb-3">
+    <div>
+      <p class="text-[10px] uppercase opacity-80"
+         x-text="'Bank Accounts (' + accounts.length + ')'"></p>
+      <p class="text-2xl font-black" x-text="formatCurrency(totals.bank, 2)"></p>
+    </div>
+    <button @click="openAccountsModal()"
+            class="text-[10px] bg-white/20 px-3 py-1 rounded-full flex-shrink-0">Manage</button>
+  </div>
+  <div class="space-y-1.5">
+    <template x-for="acc in accounts" :key="'ov-'+acc.id">
+      <div class="flex justify-between items-center text-xs gap-2">
+        <span class="truncate opacity-90" x-text="'• ' + acc.name"></span>
+        <span class="font-bold whitespace-nowrap"
+              x-text="formatCurrency(accountBalances[acc.id] || 0, 2)"></span>
       </div>
+    </template>
+    <div x-show="accounts.length === 0" class="text-xs opacity-80 italic">
+      No accounts yet — <button @click="openAccountsModal()" class="underline font-bold">add one</button>
+    </div>
+  </div>
+  <div class="flex gap-x-4 gap-y-1 mt-3 pt-3 border-t border-white/20 text-xs flex-wrap">
+    <span>💵 Cash: <b x-text="formatCurrency(openingBalances.cash, 2)"></b></span>
+    <span>📈 Investment: <b x-text="formatCurrency(openingBalances.investment, 2)"></b></span>
+  </div>
+</div>
 
       <div x-show="budgetAlert.show" class="bg-amber-50 dark:bg-amber-900/30 border-l-4 border-amber-500 p-3 rounded-xl" role="alert">
         <div class="flex items-center gap-2">
